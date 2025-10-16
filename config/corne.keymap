@@ -40,10 +40,10 @@
 
             display-name = "Lower";
             bindings = <
-&kp TAB           &kp F2           &kp F4           &kp F11          &kp HOME         &kp END            &trans           &kp LEFT                         &kp UP_ARROW                       &kp DOWN_ARROW                     &kp RIGHT                         &kp BSPC
-&kp LEFT_SHIFT    &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_NUMBER_4  &kp KP_NUMBER_5    &kp KP_NUMBER_6  &kp KP_NUMBER_7                  &kp KP_NUMBER_8                    &kp KP_NUMBER_9                    &kp KP_NUMBER_0                   &kp C_VOLUME_UP
-&kp LEFT_CONTROL  &bt BT_CLR       &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2     &bt BT_SEL 3       &rgb_ug RGB_TOG  &rgb_ug RGB_COLOR_HSB(35,50,25)  &rgb_ug RGB_COLOR_HSB(140,100,25)  &rgb_ug RGB_COLOR_HSB(290,100,25)  &rgb_ug RGB_COLOR_HSB(200,80,40)  &kp C_VOL_DN
-                                                    &kp LGUI         &trans           &kp SPACE          &kp RET          &trans                           &kp DELETE
+&kp GRAVE  &kp N1     &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp N5         &kp NUMBER_6     &kp N7            &kp N8             &kp N9                &kp N0                 &kp BSPC
+&kp TILDE  &kp EXCL   &kp AT        &kp HASH      &kp DOLLAR    &kp PERCENT    &kp CARET        &kp AMPERSAND     &kp ASTERISK       &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp BACKSLASH
+&kp PIPE   &kp UNDER  &kp MINUS     &kp EQUAL     &kp PLUS      &trans         &kp PRINTSCREEN  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp LEFT_BRACE        &kp RIGHT_BRACE        &kp K_MUTE
+                                    &kp LGUI      &trans        &kp SPACE      &kp RET          &trans            &kp DELETE
             >;
         };
 
@@ -56,10 +56,10 @@
 
             display-name = "Raise";
             bindings = <
-&kp TAB           &kp EXCL  &kp AT      &kp HASH   &kp DLLR   &kp PRCNT    &kp CARET  &kp AMPS   &kp KP_MULTIPLY  &kp LPAR  &kp RPAR  &kp BSPC
-&kp LEFT_SHIFT    &trans    &kp RA(F4)  &kp RC(V)  &kp RC(C)  &kp LG(L)    &kp MINUS  &kp EQUAL  &kp LBKT         &kp RBKT  &kp BSLH  &kp GRAVE
-&kp LEFT_CONTROL  &trans    &trans      &trans     &trans     &trans       &kp UNDER  &kp PLUS   &kp LBRC         &kp RBRC  &kp PIPE  &kp TILDE
-                                        &kp LGUI   &trans     &kp SPACE    &kp RET    &trans     &kp DELETE
+&kp ESCAPE        &kp F2           &kp F3                          &kp F4                           &kp F5                             &kp F11                              &trans            &trans     &kp UP_ARROW  &kp C_VOLUME_UP  &kp C_VOLUME_DOWN  &kp DELETE
+&kp LEFT_SHIFT    &rgb_ug RGB_TOG  &rgb_ug RGB_COLOR_HSB(46,0,40)  &rgb_ug RGB_COLOR_HSB(42,42,35)  &rgb_ug RGB_COLOR_HSB(200,100,50)  &rgb_ug RGB_COLOR_HSB(116,100,50)    &kp LC(LS(LEFT))  &kp LEFT   &kp DOWN      &kp RIGHT        &kp LC(LS(RIGHT))  &kp PAGE_UP
+&kp LEFT_CONTROL  &bt BT_CLR       &bt BT_SEL 1                    &bt BT_SEL 2                     &bt BT_SEL 3                       &bt BT_SEL 4                         &kp LC(C)         &kp LC(V)  &kp LC(A)     &kp LG(L)        &kp LA(F4)         &kp PAGE_DOWN
+                                                                   &kp LGUI                         &trans                             &kp SPACE                            &kp RET           &trans     &kp DELETE
             >;
         };
     };
