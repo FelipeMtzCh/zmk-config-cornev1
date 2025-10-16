@@ -12,6 +12,15 @@
 &led_strip { chain-length = <27>; };
 
 / {
+    macros {
+        cal: cal {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp FSLH &kp C &kp A &kp L &kp I &kp F &kp I &kp C &kp A &kp C &kp I &kp O &kp N>;
+            label = "CAL";
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -42,7 +51,7 @@
             bindings = <
 &kp GRAVE  &kp N1     &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp N5         &kp NUMBER_6     &kp N7            &kp N8             &kp N9                &kp N0                 &kp BSPC
 &kp TILDE  &kp EXCL   &kp AT        &kp HASH      &kp DOLLAR    &kp PERCENT    &kp CARET        &kp AMPERSAND     &kp ASTERISK       &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp BACKSLASH
-&kp PIPE   &kp UNDER  &kp MINUS     &kp EQUAL     &kp PLUS      &trans         &kp PRINTSCREEN  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp LEFT_BRACE        &kp RIGHT_BRACE        &kp K_MUTE
+&kp PIPE   &kp UNDER  &kp MINUS     &kp EQUAL     &kp PLUS      &cal           &kp PRINTSCREEN  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp LEFT_BRACE        &kp RIGHT_BRACE        &kp K_MUTE
                                     &kp LGUI      &trans        &kp SPACE      &kp RET          &trans            &kp DELETE
             >;
         };
