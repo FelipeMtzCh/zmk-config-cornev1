@@ -15,7 +15,7 @@ manifest:
   projects:
     - name: zmk
       remote: zmkfirmware
-      revision: main          # ← reemplazar por SHA para builds reproducibles
+      revision: v0.3 # ← reemplazar por SHA para builds reproducibles
       import: app/west.yml
 
   self:
