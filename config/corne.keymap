@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2020 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
+ * Optimized Corne Keymap for Robotics & Keyboard Design
+ * - Homerow Mods integrados (A, S, D, F / J, K, L, ;)
+ * - Teclas físicas redundantes convertidas en herramientas de productividad
  */
 
 #include <behaviors.dtsi>
@@ -9,66 +9,93 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/rgb.h>
 
+/* ─── Configuración global de hold-tap ─── */
+&mt {
+    flavor = "tap-preferred";
+    tapping-term-ms = <200>;
+    quick-tap-ms = <125>;
+    require-prior-idle-ms = <100>;
+};
+
 &led_strip { chain-length = <27>; };
 
 / {
     macros {
+        /* Macro para abrir terminal en Ubuntu */
+        term: term {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LA(T))>;
+            label = "TERMINAL";
+        };
+
+        /* Macros de utilidad para ROS2 */
+        cbuild: cbuild {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp C &kp O &kp L &kp C &kp O &kp N &kp SPACE &kp B &kp U &kp I &kp L &kp D &kp ENTER>;
+            label = "COLCON_BUILD";
+        };
+
+        rrun: rrun {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp R &kp O &kp S &kp N2 &kp SPACE &kp R &kp U &kp N &kp SPACE>;
+            label = "ROS2_RUN";
+        };
+
         cal: cal {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp FSLH &kp C &kp A &kp L &kp I &kp F &kp I &kp C &kp A &kp C &kp I &kp O &kp N>;
             label = "CAL";
         };
+
+        /* Símbolos de apertura/cierre (Mantenidos de tu config original) */
+        m_paren_o: m_paren_o { compatible="zmk,behavior-macro"; #binding-cells=<0>; bindings=<&kp LPAR>; label="M_PAREN_O"; };
+        m_paren_c: m_paren_c { compatible="zmk,behavior-macro"; #binding-cells=<0>; bindings=<&kp RPAR>; label="M_PAREN_C"; };
+        m_brack_o: m_brack_o { compatible="zmk,behavior-macro"; #binding-cells=<0>; bindings=<&kp LBKT>; label="M_BRACK_O"; };
+        m_brack_c: m_brack_c { compatible="zmk,behavior-macro"; #binding-cells=<0>; bindings=<&kp RBKT>; label="M_BRACK_C"; };
+        m_brace_o: m_brace_o { compatible="zmk,behavior-macro"; #binding-cells=<0>; bindings=<&kp LBRC>; label="M_BRACE_O"; };
+        m_brace_c: m_brace_c { compatible="zmk,behavior-macro"; #binding-cells=<0>; bindings=<&kp RBRC>; label="M_BRACE_C"; };
+    };
+
+    behaviors {
+        td_paren: td_paren { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&m_paren_o>, <&m_paren_c>; };
+        td_brack: td_brack { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&m_brack_o>, <&m_brack_c>; };
+        td_brace: td_brace { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&m_brace_o>, <&m_brace_c>; };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
-            // -----------------------------------------------------------------------------------------
-            // |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BKSP |
-            // | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
-            // | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
-            //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
-
             display-name = "Base";
             bindings = <
-&kp ESCAPE        &kp Q  &kp W  &kp E     &kp R  &kp T        &kp Y      &kp U  &kp I       &kp O    &kp P     &kp BSPC
-&kp LEFT_SHIFT    &kp A  &kp S  &kp D     &kp F  &kp G        &kp H      &kp J  &kp K       &kp L    &kp SEMI  &kp SQT
-&kp LEFT_CONTROL  &kp Z  &kp X  &kp C     &kp V  &kp B        &kp N      &kp M  &kp COMMA   &kp DOT  &kp FSLH  &kp TAB
-                                &kp LGUI  &mo 1  &kp SPACE    &kp ENTER  &mo 2  &kp DELETE
+&kp GRAVE      &kp Q          &kp W          &kp E           &kp R           &kp T         &kp Y      &kp U           &kp I           &kp O          &kp P          &kp BSPC
+&caps_word     &mt LGUI A     &mt LALT S     &mt LCTRL D     &mt LSHIFT F    &kp G         &kp H      &mt RSHIFT J    &mt RCTRL K     &mt RALT L     &mt RGUI SEMI  &kp SQT
+&term          &kp Z          &kp X          &kp C           &kp V           &kp B         &kp N      &kp M           &kp COMMA       &kp DOT        &kp FSLH       &kp TAB
+                                             &kp LGUI        &lt 1 ESC       &kp SPACE     &kp ENTER  &mo 2           &kp DELETE
             >;
         };
 
         lower_layer {
-            // -----------------------------------------------------------------------------------------
-            // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
-            // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
-            // | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-            //                    | GUI |     | SPC |   | ENT |     | ALT |
-
-            display-name = "Lower";
+            display-name = "Sym/Dev";
             bindings = <
-&kp GRAVE  &kp N1     &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp N5         &kp NUMBER_6     &kp N7            &kp N8             &kp N9                &kp N0                 &kp BSPC
-&kp TILDE  &kp EXCL   &kp AT        &kp HASH      &kp DOLLAR    &kp PERCENT    &kp CARET        &kp AMPERSAND     &kp ASTERISK       &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp BACKSLASH
-&kp PIPE   &kp UNDER  &kp MINUS     &kp EQUAL     &kp PLUS      &cal           &kp PRINTSCREEN  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp LEFT_BRACE        &kp RIGHT_BRACE        &kp K_MUTE
-                                    &kp LGUI      &trans        &kp SPACE      &kp RET          &trans            &kp DELETE
+&kp ESC     &kp TILDE   &kp EXCL     &kp AT       &kp HASH      &kp DOLLAR      &kp KP_MULTIPLY  &kp N7   &kp N8  &kp N9  &kp KP_SLASH   &kp BSPC
+&trans      &td_paren   &td_brack    &td_brace     &rrun         &cbuild         &kp KP_MINUS     &kp N4   &kp N5  &kp N6  &kp KP_PLUS    &kp ENTER
+&trans      &kp UNDER   &kp MINUS    &kp EQUAL     &kp PLUS      &cal            &kp N0           &kp N1   &kp N2  &kp N3  &kp DOT        &kp TAB
+                                     &kp LGUI      &trans        &kp SPACE       &kp ENTER        &trans   &kp DELETE
             >;
         };
 
         raise_layer {
-            // -----------------------------------------------------------------------------------------
-            // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
-            // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
-            // | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
-            //                    | GUI |     | SPC |   | ENT |     | ALT |
-
-            display-name = "Raise";
+            display-name = "Config";
             bindings = <
-&kp ESCAPE        &kp F2           &kp F3                          &kp F4                           &kp F5                             &kp F11                              &trans            &trans     &kp UP_ARROW  &kp C_VOLUME_UP  &kp C_VOLUME_DOWN  &kp DELETE
-&kp LEFT_SHIFT    &rgb_ug RGB_TOG  &rgb_ug RGB_COLOR_HSB(46,0,40)  &rgb_ug RGB_COLOR_HSB(42,42,35)  &rgb_ug RGB_COLOR_HSB(200,100,50)  &rgb_ug RGB_COLOR_HSB(116,100,50)    &kp LC(LS(LEFT))  &kp LEFT   &kp DOWN      &kp RIGHT        &kp LC(LS(RIGHT))  &kp PAGE_UP
-&kp LEFT_CONTROL  &bt BT_CLR       &bt BT_SEL 0                    &bt BT_SEL 1                     &bt BT_SEL 2                       &bt BT_SEL 3                         &kp LC(C)         &kp LC(V)  &kp LC(A)     &kp LG(L)        &kp LA(F4)         &kp PAGE_DOWN
-                                                                   &kp LGUI                         &trans                             &kp SPACE                            &kp RET           &trans     &kp DELETE
+&kp ESC        &kp F2           &kp F3                           &kp F4                            &kp F5                            &kp F11                              &trans            &trans          &kp C_VOL_UP   &kp C_VOL_DN   &kp C_MUTE         &kp DELETE
+&kp LSHIFT     &rgb_ug RGB_TOG  &rgb_ug RGB_COLOR_HSB(46,0,40)   &rgb_ug RGB_COLOR_HSB(42,42,35)   &rgb_ug RGB_COLOR_HSB(200,100,50)  &rgb_ug RGB_COLOR_HSB(116,100,50)    &kp LC(LS(LEFT))  &kp LEFT        &kp DOWN       &kp RIGHT      &kp LC(LS(RIGHT))  &kp PG_UP
+&kp LCTRL      &bt BT_CLR       &bt BT_SEL 0                     &bt BT_SEL 1                      &bt BT_SEL 2                       &bt BT_SEL 3                         &kp LC(C)         &kp LC(V)       &kp LC(F)      &kp LC(LS(F4)) &kp PSCRN          &kp PG_DN
+                                                                 &kp LGUI                          &trans                             &kp C_PP                             &kp C_NEXT        &trans          &kp C_PREV
             >;
         };
     };

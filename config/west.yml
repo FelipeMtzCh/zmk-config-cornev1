@@ -1,11 +1,22 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  config/west.yml — Manifiesto de dependencias ZMK            ║
+# ║                                                              ║
+# ║  Apunta a la rama `main` de ZMK. Si quieres un build        ║
+# ║  reproducible y estable, reemplaza `revision: main` por      ║
+# ║  un commit SHA específico, ej:                               ║
+# ║    revision: a1b2c3d4e5f6...                                 ║
+# ╚══════════════════════════════════════════════════════════════╝
+
 manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+
   projects:
     - name: zmk
       remote: zmkfirmware
-      revision: main
+      revision: main          # ← reemplazar por SHA para builds reproducibles
       import: app/west.yml
+
   self:
     path: config
